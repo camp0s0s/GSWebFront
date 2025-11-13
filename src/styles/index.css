@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: rgb(249 250 251); /* bg-gray-50 */
+  color: rgb(17 24 39); /* text-gray-900 */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+html.dark body {
+  background-color: rgb(17 24 39); /* bg-gray-900 */
+  color: rgb(243 244 246); /* text-gray-100 */
+}
