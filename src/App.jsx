@@ -51,8 +51,21 @@ export default function App() {
     alert(`Mensagem enviada para o profissional ID: ${id}`);
   };
 
+  useEffect(() => {
+  const html = document.documentElement;
+
+  if (darkMode) {
+    html.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    html.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
+  }, [darkMode]);
+
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors">
       {/* header */}
       <header className="flex flex-col sm:flex-row justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">
