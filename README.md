@@ -1,39 +1,69 @@
-# React + Vite
+# ReSkill Loop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ReSkill Loop é uma aplicação web interativa voltada ao **futuro do trabalho**, criada para simular uma rede profissional moderna onde profissionais podem exibir perfis completos, listar habilidades, histórico acadêmico, experiências e muito mais.
 
-Currently, two official plugins are available:
+O projeto utiliza tecnologias atuais como **Vite**, **React** e **Tailwind CSS**, oferecendo uma interface rápida, responsiva e com suporte a **Dark Mode**.  
+A aplicação carrega automaticamente **60 perfis simulados**, permitindo busca, filtros e visualização detalhada via modal.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✔️ Listagem de perfis profissionais (nome, foto, cargo, skills)
+- ✔️ Busca por nome
+- ✔️ Filtros por cidade, área/cargo e tecnologias
+- ✔️ Modal com informações completas:
+  - Experiência profissional  
+  - Formação  
+  - Habilidades técnicas  
+  - Soft skills  
+  - Hobbies  
+- ✔️ Botões funcionais:
+  - 👍 Recomendar profissional  
+  - ✉️ Enviar mensagem (simulação via alert)
+- ✔️ Dark Mode
+- ✔️ Design moderno utilizando Tailwind CSS
+- ✔️ Perfis simulados gerados automaticamente no lado do cliente
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 👥 Usuários e Senhas
 
-import { useEffect, useState } from "react";
+Este projeto **não possui autenticação real**.  
+Nenhum usuário ou senha é necessário.
 
+Se futuramente for implementado login, este README poderá ser atualizado com as credenciais padrão.
 
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        className="mb-6 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 dark:bg-yellow-400 dark:text-gray-900 transition"
-      >
-        {darkMode ? "☀️ Modo Claro" : "🌙 Modo Escuro"}
-      </button>
+---
 
-      <h1 className="text-3xl font-bold mb-4">
-        ReSkill Loop — Rede Profissional
-      </h1>
+## 🛠️ Tecnologias Utilizadas
 
-      <p className="max-w-lg text-center text-gray-600 dark:text-gray-300">
-        Explore perfis profissionais, visualize competências e conecte-se com
-        pessoas que estão moldando o futuro do trabalho.
-      </p>
-    </div>
-  
+- **Vite**
+- **React**
+- **Tailwind CSS**
+- **JavaScript / JSX**
+- **Dicebear Avatars** (para geração automática de fotos)
 
+---
+
+# 🚀 Instalação e Execução
+
+Siga os passos abaixo para rodar o projeto localmente.
+
+---
+
+## 1. Clonar o repositório
+
+```bash
+git clone https://github.com/camp0s0s/GSWebFront
+```
+
+## 2. Instalar dependencias
+
+```bash
+npm install
+```
+
+---
+
+> Feito por [Felipe Campos](https://github.com/camp0s0s)
