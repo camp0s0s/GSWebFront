@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { profiles as simulatedProfiles } from "./data/profiles";
+import logo from "./assets/logo.png"
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -62,7 +63,11 @@ export default function App() {
       {/* header */}
       <header className="flex flex-col sm:flex-row justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">
-          ReSkill Loop – Rede Profissional
+          <img 
+          src={logo}
+          alt="logo - ReSkill Loop"
+          className="w-auto h-32 object-cover mx-auto mb-4"
+          ></img>
         </h1>
 
         <button
