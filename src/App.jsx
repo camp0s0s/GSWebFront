@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
-import profilesData from "./data/profiles.json";
+import { profiles as simulatedProfiles } from "./data/profiles";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
-  const [profiles, setProfiles] = useState(profilesData);
+
+  // evita sobrescrever o import
+  const [profiles, setProfiles] = useState(simulatedProfiles);
+
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [search, setSearch] = useState("");
   const [filterArea, setFilterArea] = useState("");
   const [filterCity, setFilterCity] = useState("");
   const [filterSkill, setFilterSkill] = useState("");
 
-  // alternância do tema
+  // ✅ DARK MODE — versão correta e única
   useEffect(() => {
     const html = document.documentElement;
+
     if (darkMode) {
       html.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -26,14 +30,15 @@ export default function App() {
 
   // filtrar perfis
   const filteredProfiles = profiles.filter((p) => {
-    const matchesSearch = p.nome.toLowerCase().includes(search.toLowerCase());
-    const matchesArea = !filterArea || p.area === filterArea;
-    const matchesCity = !filterCity || p.localizacao.includes(filterCity);
+    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+    const matchesArea = !filterArea || p.role === filterArea;
+    const matchesCity = !filterCity || p.city.includes(filterCity);
     const matchesSkill =
       !filterSkill ||
-      p.habilidadesTecnicas.some((h) =>
+      p.skills.some((h) =>
         h.toLowerCase().includes(filterSkill.toLowerCase())
       );
+
     return matchesSearch && matchesArea && matchesCity && matchesSkill;
   });
 
@@ -46,31 +51,20 @@ export default function App() {
     );
   };
 
-  // enviar mensagem (simulado)
+  // enviar mensagem
   const handleMessage = (id) => {
-    alert(`Mensagem enviada para o profissional ID: ${id}`);
+    alert(`Mensagem enviada para ${id}`);
   };
-
-  useEffect(() => {
-  const html = document.documentElement;
-
-  if (darkMode) {
-    html.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  } else {
-    html.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  }
-  }, [darkMode]);
-
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors">
+
       {/* header */}
       <header className="flex flex-col sm:flex-row justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">
           ReSkill Loop – Rede Profissional
         </h1>
+
         <button
           onClick={() => setDarkMode(!darkMode)}
           className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 dark:bg-yellow-400 dark:text-gray-900 transition"
@@ -88,13 +82,15 @@ export default function App() {
           onChange={(e) => setSearch(e.target.value)}
           className="px-3 py-2 rounded-lg border dark:border-gray-700 dark:bg-gray-800"
         />
+
         <input
           type="text"
-          placeholder="Filtrar por área..."
+          placeholder="Filtrar por cargo..."
           value={filterArea}
           onChange={(e) => setFilterArea(e.target.value)}
           className="px-3 py-2 rounded-lg border dark:border-gray-700 dark:bg-gray-800"
         />
+
         <input
           type="text"
           placeholder="Filtrar por cidade..."
@@ -102,6 +98,7 @@ export default function App() {
           onChange={(e) => setFilterCity(e.target.value)}
           className="px-3 py-2 rounded-lg border dark:border-gray-700 dark:bg-gray-800"
         />
+
         <input
           type="text"
           placeholder="Filtrar por tecnologia..."
@@ -120,17 +117,19 @@ export default function App() {
             className="cursor-pointer bg-white dark:bg-gray-800 rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
           >
             <img
-              src={p.foto}
-              alt={p.nome}
+              src={p.photo}
+              alt={p.name}
               className="w-full h-48 object-cover"
             />
+
             <div className="p-4">
-              <h2 className="text-lg font-semibold">{p.nome}</h2>
+              <h2 className="text-lg font-semibold">{p.name}</h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {p.cargo}
+                {p.role}
               </p>
+
               <div className="mt-2 flex flex-wrap gap-1">
-                {p.habilidadesTecnicas.slice(0, 3).map((h, i) => (
+                {p.skills.slice(0, 3).map((h, i) => (
                   <span
                     key={i}
                     className="px-2 py-1 text-xs rounded bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
@@ -156,43 +155,36 @@ export default function App() {
             </button>
 
             <img
-              src={selectedProfile.foto}
-              alt={selectedProfile.nome}
+              src={selectedProfile.photo}
+              alt={selectedProfile.name}
               className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
             />
+
             <h2 className="text-xl font-bold text-center mb-1">
-              {selectedProfile.nome}
+              {selectedProfile.name}
             </h2>
+
             <p className="text-center text-gray-500 mb-4">
-              {selectedProfile.cargo}
+              {selectedProfile.role}
             </p>
 
             <div className="space-y-3 text-sm">
               <p>
-                <strong>Localização:</strong> {selectedProfile.localizacao}
+                <strong>Cidade:</strong> {selectedProfile.city}
               </p>
               <p>
-                <strong>Área:</strong> {selectedProfile.area}
+                <strong>Experiência:</strong> {selectedProfile.experience}
               </p>
               <p>
-                <strong>Formação:</strong>{" "}
-                {selectedProfile.formacao
-                  ?.map((f) => `${f.curso} - ${f.instituicao}`)
-                  .join(", ")}
-              </p>
-              <p>
-                <strong>Experiências:</strong>{" "}
-                {selectedProfile.experiencias
-                  ?.map((e) => `${e.cargo} (${e.empresa})`)
-                  .join(", ")}
+                <strong>Formação:</strong> {selectedProfile.academic}
               </p>
               <p>
                 <strong>Soft Skills:</strong>{" "}
-                {selectedProfile.softSkills?.join(", ")}
+                {selectedProfile.softSkills.join(", ")}
               </p>
               <p>
                 <strong>Tecnologias:</strong>{" "}
-                {selectedProfile.habilidadesTecnicas?.join(", ")}
+                {selectedProfile.skills.join(", ")}
               </p>
             </div>
 
@@ -203,6 +195,7 @@ export default function App() {
               >
                 👍 Recomendar ({selectedProfile.recommends || 0})
               </button>
+
               <button
                 onClick={() => handleMessage(selectedProfile.id)}
                 className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
@@ -210,6 +203,7 @@ export default function App() {
                 ✉️ Enviar mensagem
               </button>
             </div>
+
           </div>
         </div>
       )}
